@@ -2,7 +2,7 @@
 console.log("working");
 
 // Create the map object with a center and ZOOM LEVEL.
-let map = L.map('mapid').setView([34.0522, -118.2437], 14);
+let map = L.map('mapid').setView([40.7, -94.5], 4);
     // L.map() instantiate the object with string 'mapid'
     // mpaid will reference id tag in our <div> element on the index.html
     // setView() method sets the view of the map w/ geographical center, where 
@@ -57,9 +57,27 @@ streets.addTo(map);
 // radius meausred in pixels instead of meters (L.circle())
     //pixel size doesn't change with zooming in or out, probably best to stick 
     //to meters w/L.circle()
-L.circleMarker([34.0522, -118.2437], {
-    radius: 300,
-    color: 'black',
-    fillColor: '#ffffa1' //yellow
-}).addTo(map);
+// L.circleMarker([34.0522, -118.2437], {
+//     radius: 300,
+//     color: 'black',
+//     fillColor: '#ffffa1' //yellow
+// }).addTo(map);
 
+//Start of 13.4.2
+// Get data from cities.js
+let cityData = cities;
+
+  // Loop through the cities array and create one marker for each city.
+cityData.forEach(function(city) {
+    console.log(city)
+    L.circle(city.location, {
+        radius: city.population/30,
+        color: 'orange',
+        weight: 4
+    })
+    .bindPopup('<h2>' + city.city + ', ' + city.state + 
+    '</h2> <hr> <h3> Population ' + city.population.toLocaleString() + '</h3>')
+    .addTo(map); //toLocaleString() adds commas every three characters? 
+                    //since the number is technically a string
+                    //confirm in office hours
+   });
