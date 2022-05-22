@@ -2,7 +2,7 @@
 console.log("working");
 
 // Create the map object with a center and ZOOM LEVEL.
-let map = L.map('mapid').setView([37.5, -122.5], 10);
+let map = L.map('mapid').setView([30, 30], 2);
     // L.map() instantiate the object with string 'mapid'
     // mpaid will reference id tag in our <div> element on the index.html
     // setView() method sets the view of the map w/ geographical center, where 
@@ -59,11 +59,11 @@ streets.addTo(map);
 // radius meausred in pixels instead of meters (L.circle())
     //pixel size doesn't change with zooming in or out, probably best to stick 
     //to meters w/L.circle()
-L.circleMarker([34.0522, -118.2437], {
-    radius: 300,
-    color: 'black',
-    fillColor: '#ffffa1' //yellow
-}).addTo(map);
+// L.circleMarker([34.0522, -118.2437], {
+//     radius: 300,
+//     color: 'black',
+//     fillColor: '#ffffa1' //yellow
+// }).addTo(map);
 
 
 
@@ -71,25 +71,25 @@ L.circleMarker([34.0522, -118.2437], {
 
 
 // Add GeoJSON data.
-let sanFranAirport =
-{"type":"FeatureCollection","features":[{
-    "type":"Feature",
-    "properties":{
-        "id":"3469",
-        "name":"San Francisco International Airport",
-        "city":"San Francisco",
-        "state": "California",
-        "country":"United States",
-        "faa":"SFO",
-        "icao":"KSFO",
-        "alt":"13",
-        "tz-offset":"-8",
-        "dst":"A",
-        "tz":"America/Los_Angeles"},
-        "geometry":{
-            "type":"Point",
-            "coordinates":[-122.375,37.61899948120117]}}
-]};
+// let sanFranAirport =
+// {"type":"FeatureCollection","features":[{
+//     "type":"Feature",
+//     "properties":{
+//         "id":"3469",
+//         "name":"San Francisco International Airport",
+//         "city":"San Francisco",
+//         "state": "California",
+//         "country":"United States",
+//         "faa":"SFO",
+//         "icao":"KSFO",
+//         "alt":"13",
+//         "tz-offset":"-8",
+//         "dst":"A",
+//         "tz":"America/Los_Angeles"},
+//         "geometry":{
+//             "type":"Point",
+//             "coordinates":[-122.375,37.61899948120117]}}
+// ]};
 
 // Grabbing our GeoJSON data.
 
@@ -114,3 +114,14 @@ let sanFranAirport =
           "</h2> <hr> <h4> Airport name: " + feature.properties.name + "</h4>");
       }
   }).addTo(map);
+
+  // start of 13.5.3
+  // Accessing the airport GeoJSON URL
+let airportData = "https://raw.githubusercontent.com/jojosaurusrex/Mapping_Earthquakes/main/majorAirports.json";
+
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+    console.log(data);
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJSON(data).addTo(map);
+});
