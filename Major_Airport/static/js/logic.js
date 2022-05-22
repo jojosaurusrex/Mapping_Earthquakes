@@ -107,13 +107,13 @@ streets.addTo(map);
 //   }).addTo(map);
 
 //using onEachFeature
-  L.geoJSON(sanFranAirport, {
-      onEachFeature: function(feature, layer) {
-          console.log(layer);
-          layer.bindPopup("<h2> Airport code: " + feature.properties.faa + 
-          "</h2> <hr> <h4> Airport name: " + feature.properties.name + "</h4>");
-      }
-  }).addTo(map);
+//   L.geoJSON(sanFranAirport, {
+//       onEachFeature: function(feature, layer) {
+//           console.log(layer);
+//           layer.bindPopup("<h2> Airport code: " + feature.properties.faa + 
+//           "</h2> <hr> <h4> Airport name: " + feature.properties.name + "</h4>");
+//       }
+//   }).addTo(map);
 
   // start of 13.5.3
   // Accessing the airport GeoJSON URL
