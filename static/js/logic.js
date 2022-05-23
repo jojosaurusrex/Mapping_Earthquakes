@@ -85,15 +85,25 @@ let airportData = "https://raw.githubusercontent.com/jojosaurusrex/Mapping_Earth
 // Accessing the Toronto airline routes GeoJSON URL.
 let torontoData = "https://raw.githubusercontent.com/jojosaurusrex/Mapping_Earthquakes/main/torontoRoutes.json";
 
+
+// Create a style for the lines.
+let myStyle = {
+    color: "#ffffa1",
+    weight: 2
+}
+
+
 // Grabbing our GeoJSON data.
 d3.json(torontoData).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
+  //used onEachFeature here because I belive pointToLayer only works on a point
+  //hence the marker is a single point not a line
   L.geoJSON(data, {
+      style: myStyle,
       onEachFeature: function(feature, latlng) {
         console.log(feature);
-        return L.marker(latlng)
-        .bindPopup("<h2> Airline: " + feature.properties.airline + 
+        latlng.bindPopup("<h2> Airline: " + feature.properties.airline + 
         "</h2> <hr> <h4> Destination: " + feature.properties.dst + "</h4>");
       }
   }).addTo(map);
